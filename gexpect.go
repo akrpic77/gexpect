@@ -25,6 +25,7 @@ type ExpectSubprocess struct {
 	Cmd          *exec.Cmd
 	buf          *buffer
 	outputBuffer []byte
+	Tty          *os.File
 }
 
 type buffer struct {
@@ -416,6 +417,7 @@ func _start(expect *ExpectSubprocess) (*ExpectSubprocess, error) {
 		return nil, err
 	}
 	expect.buf.f = f
+	expect.Tty = f
 
 	return expect, nil
 }
